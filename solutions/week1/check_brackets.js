@@ -19,7 +19,13 @@ const checkBrackets = (str) => {
       stack.push(char);
     } else {
       // check if stack is empty
-      if
+      if (stack.length === 0) return false;
+      let top = stack.pop();
+      if (top === '[' and char != ']') ||
+        (top === '(' and char != ')') {
+          return false;
+        }
     }
   }
+  return stack.length === 0;
 }
