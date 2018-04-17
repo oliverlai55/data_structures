@@ -2,13 +2,13 @@ const readline = require('readline');
 process.stdin.setEncoding('utf8');
 
 const rl = readline.createInterface({
-  input: process.stdin,
-})
+	input: process.stdin,
+});
 
 const readLine = line => {
-  console.log(checkBrackets(line));
-  process.exit();
-}
+	console.log(checkBrackets(line));
+	process.exit();
+};
 
 rl.on('line', readLine);
 
