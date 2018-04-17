@@ -13,19 +13,27 @@ const readLine = line => {
 rl.on('line', readLine);
 
 const checkBrackets = (str) => {
+  if (str.length == 0) return false;
+
+  let matchingOpenBracket, char, index, result
   let stack = [];
-  for (let char of str ) {
-    if (char === '(' || '[') {
-      stack.push(char);
+
+  let openingBrackets = ['[', '(', '{'];
+  let closingBrackets = [']', ')', '}'];
+
+  for (index = 0; index < str.length; index++) {
+    char = str[index];
+
+    if (closingBrackets.indexOf(char) > -1) {
+      matchingOpenBracket = openingBrackets[closingBrackets.indexOf(char)]
+      if (stack.length == 0 || (stack.pop() != matchingOpenBracket)) {
+        index = index * 1 + 1;
+        return index;
+      }
     } else {
-      // check if stack is empty
-      if (stack.length === 0) return false;
-      let top = stack.pop();
-      if ((top === '[' && char != ']') ||
-        (top === '(' && char != ')')) {
-          return false;
-        }
+      stack.push(char);
     }
   }
-  return stack.length === 0;
+  result = stack.length == 0 ? 'Success' : index;
+  return result;
 }
